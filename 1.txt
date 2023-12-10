@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        #quiz-container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 300px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h2>Math Quiz</h2>
+    <p id="question"></p>
+    <input type="text" id="answer" placeholder="Your answer">
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="result"></p>
+    <button onclick="nextQuestion()">Next Question</button>
+</div>
+
+<script>
+    // Variables
+    var num1, num2, answer, userAnswer;
+
+    // Function to generate a random question
+    function generateQuestion() {
+        num1 = Math.floor(Math.random() * 10) + 1;
+        num2 = Math.floor(Math.random() * 10) + 1;
+        answer = num1 + num2;
+
+        document.getElementById('question').innerHTML = num1 + ' + ' + num2 + ' =';
+    }
+
+    // Function to check the user's answer
+    function checkAnswer() {
+        userAnswer = document.getElementById('answer').value;
+        userAnswer = parseInt(userAnswer);
+
+        if (isNaN(userAnswer)) {
+            document.getElementById('result').innerHTML = 'Please enter a valid number!';
+            return;
+        }
+
+        if (userAnswer === answer) {
+            document.getElementById('result').innerHTML = 'Correct!';
+        } else {
+            document.getElementById('result').innerHTML = 'Incorrect. Try again!';
+        }
+    }
+
+    // Function to move to the next question
+    function nextQuestion() {
+        document.getElementById('result').innerHTML = '';
+        document.getElementById('answer').value = '';
+        generateQuestion();
+    }
+
+    // Initial setup
+    generateQuestion();
+</script>
+
+</body>
+</html>
